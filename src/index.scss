@@ -1,0 +1,83 @@
+
+.musicaespera{
+  width: 100%;
+
+  .pagination
+  {
+  width: 100%;
+ 
+   display: flex;
+   justify-content: center;
+  
+  }
+
+  .meLista{
+
+    tr{
+      border: 1px solid #c6c6c6;
+    }
+
+   td{
+     
+    .posicion{
+      background-color: purple;
+      color: white;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      border-radius: 50%;
+      margin: auto;
+    }
+    .nombre{
+      font-weight: 700;
+
+    }
+   }
+  }
+}
+
+
+
+.item {
+ 
+  border: 1px solid #999999;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  padding: 10px;
+  padding-left: 8px;
+  opacity: 1;
+
+  cursor: pointer;
+
+  .title {
+    font-weight: bold;
+    font-size: 125%;
+    margin: 0;
+    margin-bottom: 0.3rem;
+  }
+
+  .body {
+    margin: 0;
+    margin-bottom: 0.3rem;
+  }
+  
+  .small {
+    font-size: 66%;
+    text-align: right;
+  }
+}
+
+.dragged .item {
+  opacity: 0.25;
+  border-top: 1px solid #999999;
+  border-bottom: 1px solid #ffffff;
+}
+
+.floating .item {
+  background-color: #ffffff;
+  box-shadow: 0 4px 20px #666666;
+}
+
+.dl-item.floating {
+  width: 85%;
+}
