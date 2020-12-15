@@ -8,9 +8,16 @@ body{
   margin: 25px;
 }
 
-select {
-  font-family: 'FontAwesome', 'Second Font name';
-  font-weight: 600;
+// select {
+//   font-family: 'FontAwesome', 'Second Font name';
+//   font-weight: 600;
+//   color: #1db695;
   
+//   }
+
+  .customSelect{
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+    font-size: 18px;
   }
- 
