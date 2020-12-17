@@ -1,91 +1,135 @@
-import { useState, useEffect } from "react";
-import Select from "react-select";
-import { options } from "./components/iconList";
+// import Swal from 'sweetalert2';
 
-// const labelWithIcon =
-// const options = [
+import { useEffect } from "react";
+import { useRef, useState } from "react";
 
-// { value: 'fas fa-user', label:<i className="fas fa-user"></i> },
-// { value: 'fas fa-restroom', label:<i className="fas fa-restroom"></i> },
-// ]
+
+
+
+// Swal.fire({
+//   title: '<h4>Are you sure?</h4>',
+//   text: "You won't be able to revert this!",
+//   icon: 'warning',
+//   width:"400px",
+//   showCancelButton: true,
+//   confirmButtonColor: '#3085d6',
+//   cancelButtonColor: '#d33',
+//   confirmButtonText: 'Yes, delete it!',
+//   customClass:{
+//     icon:"popup-class",
+//     confirmButton:"confirm",
+//     cancelButton:"cancel"
+//   }
+// }).then((result) => {
+//   if (result.isConfirmed) {
+//     Swal.fire(
+//       'Deleted!',
+//       'Your file has been deleted.',
+//       'success'
+//     )
+//   }
+// })
+
+
+
 
 function App() {
-  const [formValues, setFormValues] = useState({
-    color: "",
-    icono: "",
-  });
 
-  const { color, icono } = formValues;
-  const [comb, setComb] = useState("");
+  
+  const [formValues, setformValues] = useState({
+    nombre:"",
+    files:[],
+    format:[]
+  })
 
-  let punto = icono.indexOf(".");
+  const fileref = useRef()
 
-  let soloicono = icono.substr(punto + 2);
+  const {files,format}=formValues
 
-  console.log(soloicono);
+  const [audio,setAudio] = useState("")
 
-  console.log(options.length);
+  const [nombreAudio,setNombreAudio] = useState([])
 
-  let styles = {
-    option: (provided, state) => ({
-      ...provided,
-      color: color,
-    }),
-    singleValue: (provided, state) => ({
-      ...provided,
-      color: color,
-    }),
+  useEffect(()=>{
+    
+   
+    if(fileref.current.files[0]!==undefined)
+    { setNombreAudio({...nombreAudio,nombreAudio:[...nombreAudio.concat(audio)]})
+      
+      openFile(fileref.current.files[0])
+    }
+  },[audio])
+
+  var openFile = function(archivo) {
+  
+    var reader = new FileReader();
+    reader.onload = function(){
+      var dataURL = reader.result;
+      let punto=audio.indexOf('.')
+    
+      setformValues({...formValues,format:[...format.concat(audio.substr(punto+1))],files:[...files.concat(dataURL)]})
+    };
+    reader.readAsDataURL(archivo);
   };
+  
 
-  useEffect(() => {
-    console.log(comb);
-  }, [comb]);
+  
 
-  // const handleChange = ({ target }) => {
 
-  // setIcono(target.value)
-  // };
+ const handleSubmit=(e)=>{
+  e.preventDefault()
+  console.log(formValues);
+ }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setComb(`${icono},${color}`);
-  };
+  const handleFiles =(e)=>{
+    // setAudios({audios:[...audios.audios.concat(e.target.value)]})
+    // setformValues({...formValues,files:[...files.concat(e.target.value)]})
+  }
 
-  const handleIcono = (e) => {
-    setFormValues({ ...formValues, icono: e.value });
-  };
-
+ 
   return (
-    <>
+    
+   <>
+     <form onSubmit={handleSubmit}>
+       <div className="form-group">
+         <input  
+         type="text"
+         onChange={(e)=>setformValues({...formValues,nombre:e.target.value})}
+         />
+       </div>
+       <div className="form-group">
+       <input 
+      ref={fileref}
+      accept="audio/*" 
+      type="file" 
+      value={audio}
+      className="form-control" 
+      onChange={(e)=>setAudio(e.target.value)}/>
+       </div>
+       <button className="btn btn-primary">Enviar</button>
 
 
-      <form onSubmit={handleSubmit}>
-        <div className="form-row">
-          <div className="form-group col-12 col-md-4 col-lg-4">
-            <div className="input-group">
-              <Select
-                placeholder="Seleccione Un Icono"
-                className="customSelect"
-                onChange={handleIcono}
-                options={options}
-                styles={styles}
-              />
+       <table className="table table-bordered">
+         <thead>
+           <tr><th>Nombre</th></tr>
+         </thead>
+         <tbody>
+         {
+          nombreAudio.length !== 0
+          &&
+          console.log(nombreAudio)
+          //  nombreAudio.map(nombre=>(
+          //    console.log(nombre)
+          //  ))
+          
 
-              <div className="input-group-append">
-                <input
-                  type="color"
-                  value={color}
-                  onChange={(e) =>
-                    setFormValues({ ...formValues, color: e.target.value })
-                  }
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        <button className="btn btn-primary">Enviar</button>
-      </form>
-    </>
+         }
+           </tbody>
+       </table>
+     </form>
+
+   </>
+    
   );
 }
 

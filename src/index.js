@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
+import './index.css';
 import App from './App.jsx';
 // import 'bootstrap/dist/css/bootstrap.min.css'
 // import 'bootstrap/dist/js/bootstrap.bundle.min.js'
@@ -9,9 +9,9 @@ import App from './App.jsx';
 // import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 ReactDOM.render(
-  // <React.StrictMode>
+  <React.StrictMode>
     <App />,
-  // </React.StrictMode>,
+  </React.StrictMode>,
   document.getElementById('root')
 );
 

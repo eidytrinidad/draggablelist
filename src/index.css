@@ -1,0 +1,21 @@
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  margin: 25px;
+}
+
+.popup-class{
+
+ font-size: 10px;
+}
+
+.confirm{
+  font-size: 0.95rem !important; font-weight:700;
+}
+.cancel{
+  font-size: 0.95rem !important; font-weight:700;
+}
